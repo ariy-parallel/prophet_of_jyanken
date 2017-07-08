@@ -5,6 +5,12 @@
 <form action="/update" method="post">
 {% csrf_token %}
 <input type="submit" value="最新のデータを取得する" />
+</form>
+<br>
+<form action="/predict" method="post">
+{% csrf_token %}
+<input type="submit" value="来週の手を予測する" />
+</form>
 <br>
 {% for episode in episodes %}
     <p>{{ episode.air_time | date:"Y/m/d" }}, {{ episode.hand }}</p>
