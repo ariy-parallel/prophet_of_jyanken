@@ -9,22 +9,20 @@
         <div class="col-xs-12 col-md-12">
           <h1>さあーて、来週のサザエさんは？</h1>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-3 col-md-3">
-          <form action="/update" method="post">
-            {% csrf_token %}
-            <input type="submit" value="最新のデータを取得する" class="btn btn-primary" />
-          </form>
+        <div class="col-xs-12 col-md-12">
+          <div class="float-left">
+            <form action="/predict" method="post">
+              {% csrf_token %}
+              <input type="submit" value="来週の手を予測する" class="btn btn-primary" />
+            </form>
+          </div>
+          <div class="float-right">
+            <form action="/update" method="post">
+              {% csrf_token %}
+              <input type="submit" value="最新のデータを更新する" class="btn btn-link" />
+            </form>
+          </div>
         </div>
-        <div class="col-xs-3 col-md-3">
-          <form action="/predict" method="post">
-            {% csrf_token %}
-            <input type="submit" value="来週の手を予測する" class="btn btn-primary" />
-          </form>
-        </div>
-      </div>
-      <div class="row">
         {% if message %}
           <div class="col-xs-12 col-md-12">
             <div class="alert alert-success" role="alert">
