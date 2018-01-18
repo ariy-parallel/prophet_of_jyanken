@@ -4,22 +4,57 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
   </head>
   <body>
-    さーて、来週のサザエさんは？
-    <br>
-    <br>
-    {{ message }}
-    <form action="/update" method="post">
-    {% csrf_token %}
-    <input type="submit" value="最新のデータを取得する" />
-    </form>
-    <br>
-    <form action="/predict" method="post">
-    {% csrf_token %}
-    <input type="submit" value="来週の手を予測する" />
-    </form>
-    <br>
-    {% for episode in episodes %}
-        <p>{{ episode.air_time | date:"Y/m/d" }}, {{ episode.hand }}</p>
-    {% endfor %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-md-12">
+          <h1>さあーて、来週のサザエさんは？</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-md-3">
+          <form action="/update" method="post">
+            {% csrf_token %}
+            <input type="submit" value="最新のデータを取得する" class="btn btn-primary" />
+          </form>
+        </div>
+        <div class="col-xs-3 col-md-3">
+          <form action="/predict" method="post">
+            {% csrf_token %}
+            <input type="submit" value="来週の手を予測する" class="btn btn-primary" />
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        {% if message %}
+          <div class="col-xs-12 col-md-12">
+            <div class="alert alert-success" role="alert">
+              {{ message }}
+            </div>
+          </div>
+        {% endif %}
+        <div class="col-xs-12 col-md-12">
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th>日付</th>
+                <th>手</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for episode in episodes %}
+                <tr>
+                  <td>
+                    {{ episode.air_time | date:"Y/m/d" }}
+                  </td>
+                  <td>
+                    {{ episode.hand }}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -24,7 +24,7 @@ def predict(request):
     predicted_value = __predict(episodes)
     template = loader.get_template('index.html')
     return HttpResponse(template.render(
-        { 'episodes' : episodes, 'message' : predicted_value },
+        { 'episodes' : episodes, 'message' : 'じゃん！けん！「%s」！うふふふふふふ' % predicted_value },
     request))
 
 def __get_episodes():
