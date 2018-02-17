@@ -1,5 +1,5 @@
 """
-WSGI config for opportunity_learning project.
+WSGI config for machine_learning project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "opportunity_learning.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "machine_learning.settings")
 
 application = get_wsgi_application()
