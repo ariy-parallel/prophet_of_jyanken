@@ -33,6 +33,7 @@ def __get_episodes():
 
 def __update():
     for i in range(1991, datetime.date.today().year + 1):
+        # お借りしてます
         response = urllib.request.urlopen('http://park11.wakwak.com/~hkn/data%s.htm' % i)
         soup = bs4.BeautifulSoup(response, 'lxml')
 
@@ -69,22 +70,24 @@ def __predict(episodes):
     data = []
     target = []
     for i in range(len(episodes) - 2):
+        prev = episodes[i + 1]
+        prev2 = episodes[i + 2]
         data.append([
-            1 if episodes[i + 1].hand == Episode.HANDS[0][0] else 0,
-            1 if episodes[i + 1].hand == Episode.HANDS[1][0] else 0,
-            1 if episodes[i + 1].hand == Episode.HANDS[2][0] else 0,
-            1 if episodes[i + 2].hand == Episode.HANDS[0][0] else 0,
-            1 if episodes[i + 2].hand == Episode.HANDS[1][0] else 0,
-            1 if episodes[i + 2].hand == Episode.HANDS[2][0] else 0
+            prev.hand_is_rock(),
+            prev.hand_is_sessers(),
+            prev.hand_is_paper(),
+            prev2.hand_is_rock(),
+            prev2.hand_is_sessers(),
+            prev2.hand_is_paper()
         ])
         target.append([episodes[i].hand])
     clf = svm.SVC(gamma=0.001, C=100.)
     clf.fit(data, target)
     return clf.predict([
-            1 if episodes[0].hand == Episode.HANDS[0][0] else 0,
-            1 if episodes[0].hand == Episode.HANDS[1][0] else 0,
-            1 if episodes[0].hand == Episode.HANDS[2][0] else 0,
-            1 if episodes[1].hand == Episode.HANDS[0][0] else 0,
-            1 if episodes[1].hand == Episode.HANDS[1][0] else 0,
-            1 if episodes[1].hand == Episode.HANDS[2][0] else 0
+            episodes[0].hand_is_rock(),
+            episodes[0].hand_is_sessers(),
+            episodes[0].hand_is_paper(),
+            episodes[1].hand_is_rock(),
+            episodes[1].hand_is_sessers(),
+            episodes[1].hand_is_paper()
       ])[0]
