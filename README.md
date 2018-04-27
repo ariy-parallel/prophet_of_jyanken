@@ -4,6 +4,9 @@
 引き分けを含めると勝率は約66%です。  
 パラメータが適当なので、そのあたりをチューニングすればもっと正答率が上がるかもしれません。
 
+## 画面
+![a](https://raw.github.com/wiki/kne-cr/prophet_of_jyanken/images/screenshots/index.png)   
+
 ## 操作
 
 ### 来週の手を予測する
